@@ -1,0 +1,12 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# CMS app/.env.local — Next.js CMS — The Original Lab
+# Apunta al Mock Server local (http://localhost:8091)
+#
+# Coloca este archivo dentro de la carpeta "CMS app/"
+# ─────────────────────────────────────────────────────────────────────────────
+
+API_BASE_URL=http://localhost:8091
+API_KEY=dev_key_local
+
+# Cifrado DESACTIVADO — dejar vacío para experimentar sin problemas
+PAYLOAD_ENCRYPTION_KEY=

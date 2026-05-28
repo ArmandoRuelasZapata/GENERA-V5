@@ -1,0 +1,7 @@
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/tol_splash_android12.png"
+  adaptive_icon_background: "#021024"
+  adaptive_icon_foreground: "assets/tol_splash_android12.png"
+  remove_alpha_ios: true

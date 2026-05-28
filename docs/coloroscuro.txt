@@ -1,0 +1,26 @@
+Para modo oscuro no cambias “la marca” (navy/cyan/teal); lo que cambias son las superficies (fondos, cards, bordes) y el contraste (texto). La idea es que en dark se vea premium: no negro puro, y los acentos se usan con moderación.
+
+Cómo lo manejamos (reglas)
+
+Mantén los colores de marca
+
+primary (navy) y secondary (cyan) siguen siendo los mismos.
+
+El “glow” (teal/cyan) se usa solo en estados (loader, focus, indicator).
+
+Cambia el “mundo” (surfaces)
+
+Fondo (scaffold) = near-black azul (#021024)
+
+Superficie (cards/drawer) = azul más claro (#061A2A / #0A2338)
+
+Bordes/outline = azul-gris (#1E3246 aprox.)
+
+Texto
+
+onSurface claro (casi blanco azulado)
+
+onSurfaceVariant más apagado para subtítulos/labels
+
+Elevación sin sombras
+En dark, las sombras se ven sucias. Mejor usa surfaceContainer (colores ligeramente distintos) y bordes sutiles.

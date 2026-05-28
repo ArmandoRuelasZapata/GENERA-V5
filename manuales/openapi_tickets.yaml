@@ -1,0 +1,277 @@
+openapi: 3.0.3
+info:
+  title: The Original Lab - Tickets API
+  version: 1.0.0
+  description: >
+    API para la gestión del sistema de tickets (soporte técnico o incidencias).
+    Esta API está diseñada para ser consumida desde aplicaciones móviles, web o sistemas administrativos.
+servers:
+  - url: http://localhost:8080
+    description: Entorno de Desarrollo Local
+  - url: https://theoriginallab-api-apptolv2-dev.m0oqwu.easypanel.host
+    description: Entorno de Producción
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: API Key requerida para autorizar las peticiones (Ej. apikey_flutter_app).
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 123e4567-e89b-12d3-a456-426614174000
+        user_id:
+          type: string
+          format: uuid
+          example: 987e6543-e21b-12d3-a456-426614174111
+        title:
+          type: string
+          example: Problema al completar mi pago
+        description:
+          type: string
+          example: La pantalla se queda en blanco tras meter la tarjeta.
+        status:
+          type: string
+          enum: [SUBMITTED, IN_REVIEW, RESOLVED]
+          example: SUBMITTED
+        category:
+          type: string
+          enum: [APP, PAYMENT, ORDER]
+          example: PAYMENT
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH]
+          example: HIGH
+        created_at:
+          type: string
+          format: date-time
+          example: 2026-02-26T10:00:00Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2026-02-26T10:00:00Z
+    TicketThreadItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ticket_id:
+          type: string
+          format: uuid
+        sender_type:
+          type: string
+          enum: [USER, SUPPORT, SYSTEM]
+          example: USER
+        content:
+          type: string
+          example: Hola, sigo esperando respuesta.
+        type:
+          type: string
+          enum: [TEXT, IMAGE, FILE]
+          example: TEXT
+        attachments:
+          type: array
+          items:
+            type: object
+          description: Lista de adjuntos en formato JSON
+        created_at:
+          type: string
+          format: date-time
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /tickets:
+    get:
+      summary: Listar Todos los Tickets
+      description: Devuelve todos los tickets. Puede filtrarse para devolver solo los tickets de un usuario.
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: string
+            format: uuid
+          required: false
+          description: Filtra los tickets por un usuario particular.
+      responses:
+        '200':
+          description: Listado obtenido correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tickets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ticket'
+        '403':
+          description: No autorizado (Falta API Key o es inválida).
+    post:
+      summary: Crear un Ticket
+      description: Crea un nuevo ticket de soporte asociado a un usuario.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - title
+              properties:
+                user_id:
+                  type: string
+                  format: uuid
+                  example: 987e6543-e21b-12d3-a456-426614174111
+                title:
+                  type: string
+                  example: Recibí mi pedido incompleto
+                description:
+                  type: string
+                  example: Me faltó el producto XYZ.
+                status:
+                  type: string
+                  enum: [SUBMITTED, IN_REVIEW, RESOLVED]
+                  default: SUBMITTED
+                category:
+                  type: string
+                  enum: [APP, PAYMENT, ORDER]
+                  default: APP
+                priority:
+                  type: string
+                  enum: [LOW, MEDIUM, HIGH]
+                  default: MEDIUM
+      responses:
+        '200':
+          description: Ticket creado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '400':
+          description: Solicitud incorrecta (faltan campos mandatorios).
+
+  /tickets/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: ID (UUID) del ticket.
+    get:
+      summary: Obtener Detalles del Ticket
+      description: Recupera la información de un único ticket.
+      responses:
+        '200':
+          description: Ticket encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '404':
+          description: Ticket no encontrado.
+    put:
+      summary: Actualizar Estado del Ticket
+      description: Sirve para que panel administrativo cambie la fase del ticket (ej. pasar a RESOLVED).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [SUBMITTED, IN_REVIEW, RESOLVED]
+                  example: IN_REVIEW
+      responses:
+        '200':
+          description: Ticket actualizado correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '400':
+          description: El cuerpo no incluye 'status'.
+        '404':
+          description: Ticket no encontrado.
+    delete:
+      summary: Eliminar un Ticket
+      description: Borrado total del ticket.
+      responses:
+        '200':
+          description: Ticket eliminado correctamente.
+        '404':
+          description: Ticket no encontrado.
+
+  /tickets/{id}/messages:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: ID (UUID) del ticket al que pertenecen los mensajes.
+    get:
+      summary: Cargar Conversación
+      description: Lista todo el hilo de mensajes entre cliente y soporte referente al ticket.
+      responses:
+        '200':
+          description: Lista de mensajes del ticket.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TicketThreadItem'
+    post:
+      summary: Agregar Mensaje
+      description: Agrega un mensaje o respuesta al ticket.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+                - sender_type
+              properties:
+                content:
+                  type: string
+                  example: El estatus de tu paquete ya está en camino.
+                sender_type:
+                  type: string
+                  enum: [USER, SUPPORT, SYSTEM]
+                  example: SUPPORT
+                type:
+                  type: string
+                  enum: [TEXT, IMAGE, FILE]
+                  default: TEXT
+                attachments:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+      responses:
+        '200':
+          description: Mensaje creado y guardado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketThreadItem'
+        '400':
+          description: Faltan 'content' o 'sender_type'.

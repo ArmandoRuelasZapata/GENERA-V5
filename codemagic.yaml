@@ -1,0 +1,165 @@
+workflows:
+  ios-release:
+    name: iOS — App Store Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      # 1. AQUÍ IMPORTAMOS EL GRUPO QUE CREASTE EN LA INTERFAZ
+      groups:
+        - nuevo
+        
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.theoriginallab.app
+        
+      vars:
+        FLUTTER_VERSION: "stable"
+        # ─── Variables de la app — embebidas directamente ─────────────────────
+        AUTH_API_BASE_URL: "https://theoriginallab-api-originalauth-desa.m0oqwu.easypanel.host"
+        CONTENT_API_BASE_URL: "https://theoriginallab-api-apptolv2-dev.m0oqwu.easypanel.host"
+        TICKETS_API_BASE_URL: "https://theoriginallab-api-apptolv2-dev.m0oqwu.easypanel.host"
+        CONTENT_API_KEY: "dev_key_2026"
+        AI_PROXY_URL: "https://theoriginallab-api-apptolv2-dev.m0oqwu.easypanel.host"
+        ENABLE_NETWORK_LOGS: "false"
+        PAYLOAD_ENCRYPTION_KEY: "987446b50cbeb38f8f95d50654ae8e7bf0ca5a27eb463716bfecb44d63379591"
+
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+    scripts:
+      - name: Set up Flutter
+        script: |
+          flutter --version
+
+      - name: Clean iOS build cache
+        script: |
+          flutter clean
+          rm -rf ios/Pods ios/Podfile.lock
+          rm -rf "$HOME/Library/Developer/Xcode/DerivedData"
+
+      - name: Get Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: Create iOS Keys
+        script: |
+          if [ -z "$MAPS_API_KEY" ]; then
+            echo "MAPS_API_KEY is not set. Define it in Codemagic Environment variables."
+            exit 1
+          fi
+          cat > ios/Flutter/Keys.xcconfig << EOF
+          MAPS_API_KEY=$MAPS_API_KEY
+          EOF
+      
+      - name: Validate iOS AppIcon set
+        script: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct
+
+          appicon_dir = Path("ios/Runner/Assets.xcassets/AppIcon.appiconset")
+          expected = {
+              "Icon-App-20x20@1x.png": (20, 20),
+              "Icon-App-20x20@2x.png": (40, 40),
+              "Icon-App-20x20@3x.png": (60, 60),
+              "Icon-App-29x29@1x.png": (29, 29),
+              "Icon-App-29x29@2x.png": (58, 58),
+              "Icon-App-29x29@3x.png": (87, 87),
+              "Icon-App-40x40@1x.png": (40, 40),
+              "Icon-App-40x40@2x.png": (80, 80),
+              "Icon-App-40x40@3x.png": (120, 120),
+              "Icon-App-60x60@2x.png": (120, 120),
+              "Icon-App-60x60@3x.png": (180, 180),
+              "Icon-App-76x76@1x.png": (76, 76),
+              "Icon-App-76x76@2x.png": (152, 152),
+              "Icon-App-83.5x83.5@2x.png": (167, 167),
+              "Icon-App-1024x1024@1x.png": (1024, 1024),
+          }
+
+          def png_size(path: Path):
+              with path.open("rb") as f:
+                  sig = f.read(8)
+                  if sig != b"\x89PNG\r\n\x1a\n":
+                      raise ValueError("Not a PNG")
+                  _len = struct.unpack(">I", f.read(4))[0]
+                  ctype = f.read(4)
+                  if ctype != b"IHDR":
+                      raise ValueError("Missing IHDR")
+                  w, h = struct.unpack(">II", f.read(8))
+                  return w, h
+
+          missing = []
+          wrong = []
+          for name, size in expected.items():
+              path = appicon_dir / name
+              if not path.exists():
+                  missing.append(name)
+                  continue
+              try:
+                  actual = png_size(path)
+              except Exception as e:
+                  wrong.append((name, "invalid png", str(e)))
+                  continue
+              if actual != size:
+                  wrong.append((name, f"{actual}", f"expected {size}"))
+
+          if missing or wrong:
+              print("AppIcon validation failed")
+              if missing:
+                  print("Missing:", ", ".join(missing))
+              for item in wrong:
+                  print("Mismatch:", item)
+              raise SystemExit(1)
+          print("AppIcon validation OK")
+          PY
+
+      - name: Set up code signing
+        script: |
+          keychain initialize
+          # Este script usará automáticamente las credenciales del grupo "nuevo"
+          app-store-connect fetch-signing-files \
+            com.theoriginallab.app \
+            --type IOS_APP_STORE \
+            --create
+          keychain add-certificates
+          xcode-project use-profiles
+
+      - name: Install CocoaPods
+        script: |
+          cd ios && pod install
+
+      - name: Build iOS IPA
+        script: |
+          cat > .env.prod.json << EOF
+          {
+            "AUTH_API_BASE_URL": "$AUTH_API_BASE_URL",
+            "CONTENT_API_BASE_URL": "$CONTENT_API_BASE_URL",
+            "TICKETS_API_BASE_URL": "$TICKETS_API_BASE_URL",
+            "CONTENT_API_KEY": "$CONTENT_API_KEY",
+            "AI_PROXY_URL": "$AI_PROXY_URL",
+            "ENABLE_NETWORK_LOGS": false,
+            "MAPS_API_KEY": "$MAPS_API_KEY",
+            "PAYLOAD_ENCRYPTION_KEY": "$PAYLOAD_ENCRYPTION_KEY"
+          }
+          EOF
+
+          flutter build ipa \
+            --release \
+            --dart-define-from-file=.env.prod.json \
+            --export-options-plist=/Users/builder/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+
+    publishing:
+      app_store_connect:
+        # 2. SECCIÓN ACTUALIZADA: Le decimos que se autentique usando tus variables
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: true
+        submit_to_app_store: false

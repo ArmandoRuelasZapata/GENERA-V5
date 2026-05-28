@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "142092570852",
+    "project_id": "the-original-lab-ca4be",
+    "storage_bucket": "the-original-lab-ca4be.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142092570852:android:4353a4257de55222475cf1",
+        "android_client_info": {
+          "package_name": "com.theoriginallab.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcZoRjW66eTknFoyXawzNZ0hvVI39ezQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

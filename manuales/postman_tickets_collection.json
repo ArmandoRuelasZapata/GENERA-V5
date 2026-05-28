@@ -1,0 +1,252 @@
+{
+    "info": {
+        "name": "The Original Lab - Tickets API",
+        "description": "API Oficial para gestionar el sistema de tickets de The Original Lab.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Tickets Generales",
+            "item": [
+                {
+                    "name": "1. Listar Tickets",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1.1 Listar Tickets (por Usuario)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets?user_id=TU_USER_ID_AQUI",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets"
+                            ],
+                            "query": [
+                                {
+                                    "key": "user_id",
+                                    "value": "TU_USER_ID_AQUI"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2. Crear Ticket",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"user_id\": \"TU_USER_ID_AQUI\",\n    \"title\": \"Problema de inicio de sesión\",\n    \"description\": \"La aplicación se cierra cuando accedo.\",\n    \"category\": \"APP\",\n    \"priority\": \"HIGH\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Ticket Específico",
+            "item": [
+                {
+                    "name": "3. Obtener Ticket",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets/TU_TICKET_ID_AQUI",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets",
+                                "TU_TICKET_ID_AQUI"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "4. Actualizar Estado (Soporte)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"IN_REVIEW\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets/TU_TICKET_ID_AQUI",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets",
+                                "TU_TICKET_ID_AQUI"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "5. Eliminar Ticket",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets/TU_TICKET_ID_AQUI",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets",
+                                "TU_TICKET_ID_AQUI"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Hilos y Mensajes",
+            "item": [
+                {
+                    "name": "6. Cargar Historial de Mensajes",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets/TU_TICKET_ID_AQUI/messages",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets",
+                                "TU_TICKET_ID_AQUI",
+                                "messages"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "7. Enviar Mensaje",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"sender_type\": \"USER\",\n    \"content\": \"Aquí adjunto una captura de mi problema.\",\n    \"type\": \"TEXT\",\n    \"attachments\": []\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/tickets/TU_TICKET_ID_AQUI/messages",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "tickets",
+                                "TU_TICKET_ID_AQUI",
+                                "messages"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "apikey",
+        "apikey": [
+            {
+                "key": "value",
+                "value": "{{apiKey}}",
+                "type": "string"
+            },
+            {
+                "key": "key",
+                "value": "apikey",
+                "type": "string"
+            },
+            {
+                "key": "in",
+                "value": "header",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "https://theoriginallab-api-apptolv2-dev.m0oqwu.easypanel.host",
+            "type": "string"
+        },
+        {
+            "key": "apiKey",
+            "value": "tu_api_key_secreta",
+            "type": "string"
+        }
+    ]
+}

@@ -1,0 +1,273 @@
+{
+  "introduccion": "Información a integrar en la App",
+  "servicios": [
+    {
+      "titulo": "Incubación de Proyectos",
+      "descripcion": "Ofrecemos el apoyo necesario para convertir tus sueños en realidad, través de un proceso dinámico de desarrollo."
+    },
+    {
+      "titulo": "Alianzas Estratégicas",
+      "descripcion": "Somos parte activa de comunidades tecnológicas y colaboramos estratégicamente con otras entidades, como empresas, universidades y centros de investigación."
+    },
+    {
+      "titulo": "Consultoría TI",
+      "descripcion": "Transformamos organizaciones con soluciones tecnológicas avanzadas y personalizadas."
+    },
+    {
+      "titulo": "Desarrollo de plataformas y productos",
+      "descripcion": "Implementamos IA, Business Intelligence y soluciones Cloud para potenciar el crecimiento de tu empresa. Además creamos aplicaciones que mejoran la calidad de los servicios y dan vida a las comunidades."
+    },
+    {
+      "titulo": "Capacitación",
+      "descripcion": "Impulsamos el crecimiento y la transformación digital de empresas y profesionales a través de nuestra propia academia, así como con talleres y cursos especializados en tecnología."
+    },
+    {
+      "titulo": "Outsourcing",
+      "descripcion": "Ofrecemos soluciones integrales de Outsourcing diseñadas para optimizar los recursos de tu negocio, reducir costos operativos y aumentar la eficiencia de tus procesos."
+    }
+  ],
+  "proyectos_incubados": [
+    {
+      "nombre": "MercaDgo",
+      "descripcion": "El marketplace del Estado de Durango, México"
+    },
+    {
+      "nombre": "Coronas de caridad",
+      "descripcion": "Una forma hermosa y generosa de expresar nuestras condolencias."
+    },
+    {
+      "nombre": "Impact-as-a-service",
+      "descripcion": "Una plataforma innovadora para gestionar, medir y amplificar su impacto social, económico y ambiental."
+    },
+    {
+      "nombre": "BeOriginal",
+      "descripcion": "Sistema de doble código QR que garantiza la autenticidad de su producto."
+    }
+  ],
+  "casos_de_exito": [
+    {
+      "titulo": "Ferratelle",
+      "subtitulo": "ITALIAN COOKIES",
+      "url": "https://mvp.theoriginallab.com/ferratelle",
+      "descripcion": "Sitio web que expone la tradición y autenticidad de la repostería Ferratelle. La plataforma permite a los clientes conocer la historia de los productos, explorar el catálogo y realizar compras de manera fácil y segura, consolidando su presencia en el mercado digital."
+    },
+    {
+      "titulo": "Karla Postrería",
+      "url": "https://mvp.theoriginallab.com/karlabyvalkyrie",
+      "descripcion": "Plataforma de pastelería y repostería artesanal, que permite a los clientes explorar su catálogo de postres, realizar pedidos y descubrir su deliciosa historia."
+    },
+    {
+      "titulo": "Pastoral Social",
+      "url": "https://pastoralsocialdgo.com/",
+      "descripcion": "Sitio web de la Arquidiócesis de Durango, que centraliza un sistema de documentos y subsidios audiovisuales, calendario de actividades automático y un repositorio de evidencias. La plataforma facilita la difusión de actividades, el acceso a recursos comunitarios y la conexión con voluntarios, fortaleciendo su impacto social."
+    },
+    {
+      "titulo": "Insignia",
+      "url": "https://joyeriainsignia.com/",
+      "descripcion": "Tienda en línea de joyería innovadora. Proporciona un espacio donde los clientes pueden explorar los productos e incluso unirse para ser parte de la empresa, reforzando la presencia elegante de Insignia en el mercado, con una grandiosa experiencia del usuario."
+    },
+    {
+      "titulo": "AG Soporte Legal",
+      "url": "https://agsoportelegal.com/",
+      "descripcion": "Plataforma que muestra la oferta de servicios legales. Permite a los clientes conocer las especialidades que se manejan, agendar citas, hacer consultas y acceder a información clave con facilidad, mejorando la eficiencia y visibilidad del despacho."
+    },
+    {
+      "titulo": "Valle de Amor",
+      "lema": "Renueva Tu Esperanza",
+      "url": "https://valledeamor.com/",
+      "descripcion": "Plataforma digital para intervención de familias en riesgo psicosociales. Muestra el proyecto en construcción en su paso a paso, tiene sistema de donaciones, materiales audiovisuales, un aula virtual con cursos y testimonios de amor de las personas atendidas."
+    },
+    {
+      "titulo": "Heelcro Rey",
+      "url": "https://mvp.theoriginallab.com/heelcro-rey",
+      "descripcion": "Sitio web de la industria musical, que centraliza lo más importante del cantautor Heelcro Rey, su biografía, lanzamientos, eventos y contenido exclusivo, brindando a los fans un espacio para conectarse con su música y trayectoria."
+    },
+    {
+      "titulo": "Aula IEM",
+      "entidad": "Instituto Estatal de las Mujeres Durango",
+      "url": "https://www.aulaiem.com/",
+      "descripcion": "Plataforma e-learning especializada para el Instituto de la Mujer del Estado de Durango, diseñada para facilitar el acceso a cursos y capacitaciones con perspectiva de género en línea. Esta solución permite a las usuarias fortalecer sus conocimientos y habilidades en un entorno digital accesible e intuitivo."
+    },
+    {
+      "titulo": "Logistics Rodval",
+      "url": "https://www.logisticsrodval.com",
+      "descripcion": "Plataforma de logística de transportes, que facilita el contacto directo con clientes, eliminando intermediarios a través de sistemas contenedores de rutas y datos, con una experiencia del usuario amigable y sencilla."
+    }
+  ],
+  "productos": {
+    "introduccion": "Explora nuestra selección de productos diseñados para elevar tu experiencia tecnológica.",
+    "categorias": [
+      "Sitios web",
+      "Comercio electrónico",
+      "Herramientas para educación",
+      "Soluciones Web",
+      "Inteligencia Artificial",
+      "Aplicaciones móviles",
+      "Hardware",
+      "Todos"
+    ],
+    "catalogo": [
+      {
+        "nombre": "Sitio web básico",
+        "descripcion": "Ideal para quienes desean crear un sitio web personal o un blog sencillo. Ofrece varios diseños para escoger y optimización para móviles. Perfecto para compartir ideas o tener una página personal sin complicaciones.",
+        "url": "https://theoriginallab.com/paginas",
+        "imagen": "assets/images/catalogo productos/webbasico.webp"
+      },
+      {
+        "nombre": "Sitio web para startups",
+        "descripcion": "Perfecto para emprendedores y pequeñas empresas que buscan un sitio web profesional. Este paquete te ayuda a expandir tu presencia en línea de manera efectiva",
+        "url": "https://theoriginallab.com/paginas",
+        "imagen": "assets/images/catalogo productos/webstartup.webp"
+      },
+      {
+        "nombre": "Sitio web profesional",
+        "descripcion": "Diseñado para empresas que necesitan alto rendimiento y personalización avanzada. Ideal para negocios grandes que requieren un sitio rápido, seguro y optimizado para un alto volumen de tráfico.",
+        "url": "https://theoriginallab.com/paginas",
+        "imagen": "assets/images/catalogo productos/webprofesional.webp"
+      },
+      {
+        "nombre": "Cotizador online",
+        "descripcion": "Plataforma web para calcular precios de productos o servicios en tiempo real, adaptada a diferentes modelos de negocio.",
+        "url": "https://theoriginallab.com/comercio-electronico",
+        "imagen": "assets/images/catalogo productos/cotizadoronline.webp"
+      },
+      {
+        "nombre": "Catálogo de productos",
+        "descripcion": "Solución digital para mostrar y administrar productos con imágenes, descripciones y especificaciones.",
+        "url": "https://theoriginallab.com/comercio-electronico",
+        "imagen": "assets/images/catalogo productos/caalogoproductos.webp"
+      },
+      {
+        "nombre": "Tienda virtual",
+        "descripcion": "E-commerce personalizado para vender productos o servicios con integración de pagos y gestión de pedidos.",
+        "url": "https://theoriginallab.com/comercio-electronico",
+        "imagen": "assets/images/catalogo productos/tiendavirtual.webp"
+      },
+      {
+        "nombre": "Marketplace",
+        "descripcion": "Plataforma multi-vendedor para conectar compradores y vendedores, con gestión de productos y pagos centralizados.",
+        "imagen": "assets/images/catalogo productos/marketplace.webp"
+      },
+      {
+        "nombre": "Aula virtual",
+        "descripcion": "Sistema de aprendizaje en línea que incluye gestión de cursos y evaluaciones interactivas.",
+        "url": "https://theoriginallab.com/aula-virtual",
+        "imagen": "assets/images/catalogo productos/aulavirtual.webp"
+      },
+      {
+        "nombre": "Gestor de contenidos web",
+        "descripcion": "Herramienta para crear, editar y administrar contenido digital sin necesidad de conocimientos técnicos.",
+        "url": "https://gestion.theoriginallab.com/",
+        "imagen": "assets/images/catalogo productos/gestorcontenidoweb.webp"
+      },
+      {
+        "nombre": "Mantenedor dinámico de datos",
+        "descripcion": "Aplicación flexible para administrar y actualizar información estructurada en bases de datos.",
+        "url": "https://theoriginallab.com/mantenedor-datos",
+        "imagen": "assets/images/catalogo productos/mantenedordinamicadedatos.webp"
+      },
+      {
+        "nombre": "Plataforma de mailing",
+        "descripcion": "Ideal para administrar tus listas de correo y campañas de mailing, mediante nuestra plataforma de mailing.",
+        "url": "https://theoriginallab.com/plataforma-mailing",
+        "imagen": "assets/images/catalogo productos/plataformamailing.webp"
+      },
+      {
+        "nombre": "Soluciones de videollamadas",
+        "descripcion": "Solución segura y dinámica para integrar videoconferencia en tus requerimientos.",
+        "url": "https://theoriginallab.com/soluciones-videollamadas",
+        "imagen": "assets/images/catalogo productos/solucionesdevideollamada.webp"
+      },
+      {
+        "nombre": "Bots",
+        "descripcion": "Herramienta para automatizar la atención y respuesta a tus clientes de forma rápida y eficiente.",
+        "url": "https://origlab.com/bots",
+        "imagen": "assets/images/catalogo productos/bots.webp"
+      },
+      {
+        "nombre": "Generador de logos con IA",
+        "descripcion": "Plataforma que utiliza inteligencia artificial para crear logotipos personalizados en segundos.",
+        "url": "https://theoriginallab.com/generador-logos",
+        "imagen": "assets/images/catalogo productos/generadordelogosconia.webp"
+      },
+      {
+        "nombre": "Aplicación movil básica",
+        "descripcion": "Desarrollo de apps móviles funcionales con diseño intuitivo y características esenciales para negocios.",
+        "url": "https://theoriginallab.com/aplicaciones-moviles",
+        "imagen": "assets/images/catalogo productos/appmovil.webp"
+      },
+      {
+        "nombre": "Generador de aplicaciones",
+        "descripcion": "Herramienta para crear aplicaciones web o móviles sin necesidad de programación, optimizando tiempos de desarrollo.",
+        "url": "https://theoriginallab.com/generador-app",
+        "imagen": "assets/images/catalogo productos/generadordeaplicaciones.webp"
+      },
+      {
+        "nombre": "Equipos de cómputo",
+        "descripcion": "Perfecto para quienes buscan un equipo confiable y listo para usar. Equipos con buen rendimiento. ¡Visita nuestra tienda y elige el que mejor se adapte a tus necesidades!",
+        "url": "https://store.theoriginallab.com/",
+        "imagen": "assets/images/catalogo productos/equiposdecomputo.webp"
+      }
+    ]
+  },
+  "quienes_somos": {
+    "mision": "Nuestra misión es proporcionar soluciones digitales innovadoras que optimicen la comunicación entre empresas y clientes.",
+    "vision": "Nuestra visión es ser líderes en el sector tecnológico, brindando soluciones personalizadas que impulsen el crecimiento empresarial.",
+    "valores": [
+      {
+        "nombre": "Empatía en cada acción",
+        "descripcion": "Sensibilidad. Vamos más allá de ser un simple proveedor, nos convertimos en socios de nuestros clientes, comprendemos profundamente sus necesidades y junto a ellos, formamos un solo equipo para crear soluciones personalizadas que tengan impacto concreto en sus organizaciones."
+      },
+      {
+        "nombre": "Innovación",
+        "descripcion": "Impulsamos el futuro con soluciones tecnológicas de vanguardia. Nos anticipamos a los desafíos del mercado y transformamos ideas en productos y servicios disruptivos que generan alto impacto."
+      },
+      {
+        "nombre": "Calidad",
+        "descripcion": "La excelencia es nuestro estándar. Diseñamos y desarrollamos software con precisión, seguridad y eficiencia, garantizando productos robustos, escalables y alineados con las necesidades de cada cliente."
+      },
+      {
+        "nombre": "Agilidad",
+        "descripcion": "Nos adaptamos a la velocidad de la tecnología. Aplicamos metodologías ágiles para ofrecer soluciones rápidas, flexibles y eficaces, asegurando tiempos de entrega óptimos sin comprometer la calidad."
+      }
+    ],
+    "metodologia": [
+      {
+        "titulo": "Investigación e Innovación",
+        "descripcion": "Nos mantenemos a la vanguardia de la tecnología, invirtiendo en investigación y desarrollo para ofrecerte las mejores soluciones."
+      },
+      {
+        "titulo": "Metodologías Ágiles",
+        "descripcion": "Trabajamos con metodologías ágiles que nos permiten adaptarnos rápidamente a tus necesidades y garantizar la entrega de productos de alta calidad en tiempos reducidos."
+      },
+      {
+        "titulo": "Construcción de MVPs",
+        "descripcion": "Creamos Productos Mínimos Viables (MVPs) para validar ideas rápidamente y evolucionar con base en retroalimentación real, minimizando riesgos y maximizando el impacto en tu organización."
+      }
+    ],
+    "ventajas": [
+      "Impulsamos el crecimiento y el impacto de tu startup. Entendemos tus desafíos y te ofrecemos soluciones únicas, flexibles y escalables para conquistar nuevos nichos de mercado.",
+      "Transformamos retos en oportunidades. Nos especializamos en detectar y resolver problemas complejos, desarrollando soluciones tecnológicas innovadoras, eficientes y versátiles.",
+      "Colaboraciones que impulsan el negocio. Forjamos alianzas estratégicas que aceleran la innovación y abren nuevas oportunidades. A través del trabajo conjunto, exploramos caminos disruptivos para crear productos y servicios de alto impacto."
+    ]
+  },
+  "estadisticas_y_contacto": {
+    "por_que_nosotros": "Nos especializamos en crear soluciones digitales a la medida, combinando innovación, tecnología y un enfoque centrado en el cliente. Descubre las razones que nos hacen la mejor opción para tu proyecto.",
+    "datos": [
+      "80% De las personas investigan en Internet antes de comprar",
+      "95% De las empresas digitalizadas, mejoran la experiencia del cliente.",
+      "25% De aumento en productividad experimentan las empresas al digitalizar procesos"
+    ],
+    "contacto": {
+      "telefonos": [
+        "+52 618 542 8185",
+        "+52 618 542 8195"
+      ],
+      "redes_sociales": {
+        "tiktok": "https://www.tiktok.com/@theoriginallabmx",
+        "instagram": "https://www.instagram.com/theoriginallabmx/",
+        "facebook": "https://www.facebook.com/TheOriginalLabMx/"
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+# Guia Futuras Apps
+
+Este documento define los lineamientos minimos para nuevas apps. Resume lo que ya esta probado en esta app y lo convierte en estandar.
+
+## Objetivo
+Construir apps seguras, mantenibles y escalables con buenas practicas de arquitectura, seguridad, calidad y documentacion.
+
+## Arquitectura y estructura
+- Clean Architecture con separacion clara de capas: presentation, domain, data, core, shared.
+- Separacion de responsabilidades por feature y por tipo de modulo.
+- Dependencias hacia adentro solamente, nunca al reves.
+- Inyeccion de dependencias centralizada.
+- Uso consistente de interfaces y repositorios.
+- Modelos y entidades separados de DTOs y modelos de red.
+
+## Estilo de codigo y Clean Code
+- Nombres claros y consistentes en ingles o espanol, pero sin mezclar en un mismo contexto.
+- Funciones pequenas con una sola responsabilidad.
+- Evitar comentarios decorativos; comentar solo para contexto tecnico no evidente.
+- Sin emojis en codigo, logs o comentarios.
+- Evitar duplicidad de logica; extraer helpers y utilidades en core.
+
+## Manejo de estado
+- Estado centralizado con Riverpod.
+- Providers por feature, con responsabilidades claras.
+- Evitar side effects en widgets; usar notifiers o servicios.
+
+## Networking
+- Cliente HTTP unico con configuracion central.
+- Interceptors para auth, retries, encryption, unauthorized y logging.
+- Timeouts configurados por entorno y endpoint.
+- Headers por modulo y por API.
+
+## Seguridad y OWASP
+- Configuracion de red sin trafico HTTP en claro.
+- Certificate Pinning en release.
+- Cifrado de payload con AES-256-CTR + HMAC cuando aplique.
+- Anti-replay para mutaciones con timestamp y nonce.
+- Uso de proxy propio para IA y servicios sensibles, nunca exponer keys en cliente.
+- Validacion de configuraciones criticas al inicio.
+- Deteccion de root, emulador y tampering en release.
+- WebViews con lista de dominios permitidos y solo HTTPS.
+
+## Almacenamiento y sesion
+- Tokens en secure storage.
+- Evitar SharedPreferences para datos sensibles.
+- TTL de sesion y logout por inactividad.
+- Limpieza de credenciales en reinstalacion cuando aplique.
+
+## Logs y manejo de errores
+- debugPrint solo en debug y sin datos sensibles.
+- Errores mapeados a tipos claros.
+- Mensajes al usuario consistentes y no tecnicos.
+
+## Performance
+- Cache de imagenes controlado.
+- Evitar rebuilds innecesarios y layouts costosos.
+- Listas con builders y paginacion cuando aplique.
+- Optimizar assets y evitar redundancia.
+
+## UI y UX
+- Disenos consistentes con el tema global.
+- Accesibilidad basica en botones y controles.
+- Feedback inmediato para acciones.
+- Estados vacios, loading y error bien definidos.
+
+## Configuracion y secrets
+- Variables de entorno con envied y obfuscate.
+- Ningun secreto en codigo ni en repo.
+- Placeholders en AndroidManifest y build config.
+
+## Build y release
+- Scripts de build con flags de seguridad.
+- Proguard y reglas de minificacion activas.
+- Obfuscacion y split debug info en release.
+- Verificaciones post build para secrets.
+
+## Testing
+- flutter analyze limpio sin warnings.
+- Tests de seguridad y sanidad en test/.
+- Pruebas de flujos criticos antes de release.
+
+## Documentacion
+- README y manuales actualizados por modulo.
+- Checklist de seguridad y pruebas.
+- Registro de issues y auditorias.
+
+## Definicion de hecho
+- Sin errores en flutter analyze.
+- Sin secretos en repo.
+- Cumplimiento de lineamientos de seguridad y OWASP.
+- Documentacion actualizada.
+- Flujo critico probado de inicio a fin.
+
+## Checklist rapido para nuevas apps
+- Arquitectura y estructura definidas.
+- Networking centralizado.
+- Seguridad activa en release.
+- Secrets por entorno.
+- Manejo de estado consistente.
+- Logs controlados.
+- Tests minimos ejecutados.
+- Documentacion lista.

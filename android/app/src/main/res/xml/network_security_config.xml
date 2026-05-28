@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--
+        OWASP M5: Solo se permite trafico HTTPS.
+        Solo se confían las CAs del sistema — certificados de usuario
+        instalados manualmente NO son aceptados (protección contra MITM corporativo/MDM).
+    -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.theoriginallab.com</domain>
+        <domain includeSubdomains="true">theoriginallab.com</domain>
+        <domain includeSubdomains="true">m0oqwu.easypanel.host</domain>
+    </domain-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+            <!-- NO incluir src="user" — ampliaria superficie de MITM -->
+        </trust-anchors>
+    </base-config>
+</network-security-config>

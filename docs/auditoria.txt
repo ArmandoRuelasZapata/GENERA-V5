@@ -1,0 +1,165 @@
+Auditoria de Seguridad - App Android
+
+Aplicacion: theoriginallab_v2
+Version: 2.0.0
+Tipo: Flutter (APK Release)
+Herramienta: MobSF - Static Analysis
+Resultado global: 49 / 100 - Riesgo MEDIO (Grade B)
+
+1. Resumen Ejecutivo (para no tecnicos)
+La aplicacion no presenta malware, pero contiene configuraciones inseguras tipicas de apps en desarrollo:
+
+- Esta firmada con certificado de debug.
+- Usa configuraciones criptograficas debiles.
+- Permite backup de datos y acceso a almacenamiento externo.
+- Tiene receivers expuestos (Firebase / Flutter).
+- Puede ejecutarse en Android antiguos vulnerables.
+
+No es apta para produccion en su estado actual.
+
+2. Hallazgos Criticos (HIGH)
+
+2.1 APK firmada con certificado de DEBUG
+Severidad: ALTA
+Impacto: Critico para produccion
+
+El APK esta firmado con:
+CN=Android Debug
+
+Cualquiera puede:
+- Reempaquetar la app.
+- Modificarla.
+- Firmarla de nuevo.
+- Distribuir una version maliciosa.
+
+Solucion:
+- Crear keystore de produccion.
+- Firmar con release.jks.
+- Nunca publicar APK/AAB con debug.
+
+2.2 Criptografia insegura (AES-CBC + PKCS5)
+Severidad: ALTA
+Riesgo: Padding Oracle / manipulacion de datos
+
+Uso de:
+- AES en modo CBC.
+- Sin autenticacion (HMAC / GCM).
+
+Solucion recomendada:
+- Usar AES-GCM.
+- O librerias como:
+  - flutter_secure_storage
+  - EncryptedSharedPreferences
+
+3. Hallazgos Importantes (WARNING)
+
+3.1 Android antiguo permitido
+minSdk = 24 (Android 7.0)
+Android < 10 no recibe parches de seguridad
+
+Recomendado:
+- minSdkVersion 29
+
+3.2 allowBackup habilitado
+Permite extraer datos via adb backup
+
+Solucion:
+- android:allowBackup="false"
+
+3.3 Broadcast Receivers exportados
+Receivers como:
+- FlutterFirebaseMessagingReceiver
+- FirebaseInstanceIdReceiver
+
+Estan:
+- android:exported="true"
+
+Riesgo:
+- Inyeccion de intents
+- Abuso por otras apps
+
+Solucion:
+- Exportarlos solo si es estrictamente necesario
+- Usar permisos signature
+
+3.4 Uso de almacenamiento externo
+Cualquier app puede leer datos ahi
+
+Solucion:
+- Usar almacenamiento interno
+- Cifrar archivos sensibles
+
+3.5 SQL sin proteccion
+Uso de raw SQL
+Riesgo de SQL Injection
+
+Solucion:
+- Queries parametrizadas
+- Evitar SQL manual
+
+3.6 Generador de numeros aleatorios inseguro
+RNG no criptografico
+
+Solucion:
+- SecureRandom
+
+4. Hallazgos Informativos (INFO)
+
+No criticos, pero importantes:
+- Logs con informacion sensible
+- Copia de datos al clipboard
+- Archivos temporales sin cifrar
+- Posibles secretos hardcodeados
+
+No rompen seguridad solos, pero si ayudan a un atacante.
+
+5. Permisos Analizados
+Permisos peligrosos:
+- Ubicacion precisa y aproximada
+- Notificaciones
+- Internet
+- Wake lock
+
+No son malware, pero requieren justificacion funcional.
+
+6. Analisis de Binarios Nativos (.so)
+
+Bien configurados:
+- NX
+- PIE
+- Stack Canary
+- RELRO
+- Simbolos eliminados
+
+Falta:
+- Fortify en algunos binarios (no critico en Flutter)
+
+7. Conclusion Final
+Estado actual:
+- NO LISTA PARA PRODUCCION
+
+Riesgos reales:
+- Ingenieria inversa
+- Modificacion del APK
+- Robo de datos locales
+- Abuso de componentes exportados
+
+Estado tras correcciones:
+- Nivel aceptable para produccion
+
+8. Checklist de Remediacion (prioridad)
+Urgente:
+- Firmar con keystore de produccion
+- Cambiar cifrado a AES-GCM
+- Subir minSdk a 29+
+
+Alta:
+- allowBackup=false
+- Revisar receivers exportados
+- Quitar almacenamiento externo
+- Parametrizar SQL
+
+Media:
+- Quitar logs sensibles
+- Revisar clipboard
+- Auditar secrets
